@@ -1,6 +1,17 @@
 #! /bin/sh
-sxhkd &
+# sxhkd &
+
+# Start session for polkit an etc
 lxsession &
+
+# Launch the topbar
+~/.config/polybar/launch.sh
+
+# set background
+sh .fehbg
+
+# Fix mouse pointer being a cross
+xsetroot -cursor_name left_ptr
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
@@ -18,4 +29,5 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a Zathura state=tiled
 
