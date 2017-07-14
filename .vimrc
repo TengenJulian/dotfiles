@@ -30,7 +30,7 @@ filetype plugin indent on
 set smartindent
 set autoindent
 set number
-set tabstop=4                   "A tab is 8 spaces
+set tabstop=4                   "A tab is 4 spaces
 set expandtab                   "Always uses spaces instead of tabs
 set softtabstop=4               "Insert 4 spaces when tab is pressed
 set shiftwidth=4                "An indent is 4 spaces
@@ -44,9 +44,9 @@ set guifontwide=Menlo:h11
 
 filetype plugin on
 
-" Solarized theme settings
+" Color theme settings
 syntax enable
-colorscheme base16-default-dark
+colorscheme base16-eighties
 set background=dark
 
 " Airline settings
