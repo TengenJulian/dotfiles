@@ -9,6 +9,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'terryma/vim-expand-region'
+Plug 'francoiscabrol/ranger.vim'
 
 call plug#end()
 
@@ -41,6 +42,7 @@ set wildmode=list:longest,full
 set switchbuf=useopen
 set guiheadroom=0
 set guifontwide=Menlo:h11 
+set mouse=a
 
 filetype plugin on
 
@@ -92,3 +94,38 @@ augroup resCur
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
+
+" Syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" NERDtree settings
+map <C-n> :NERDTreeToggle<CR>
+
+" TagBar
+ let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+    \]
+    \}
+
+" Tags settings
+set tags=tags;/
+
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+" autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
+
