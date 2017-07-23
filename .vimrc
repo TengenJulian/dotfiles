@@ -1,15 +1,15 @@
 set encoding=utf-8
 
 " Access colors present in 256 colorspace
-let base16colorspace=256  
+let base16colorspace=256
 call plug#begin('~/.vim/plugged')
-
 
 Plug 'tommcdo/vim-exchange'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'terryma/vim-expand-region'
 Plug 'francoiscabrol/ranger.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
 
@@ -41,8 +41,9 @@ set nojoinspaces
 set wildmode=list:longest,full
 set switchbuf=useopen
 set guiheadroom=0
-set guifontwide=Menlo:h11 
+set guifontwide=Menlo:h11
 set mouse=a
+set nowrap
 
 filetype plugin on
 
@@ -128,4 +129,11 @@ set tags=tags;/
 
 " autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 " autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
+
+"
+
+" Keybindings
+let mapleader=" "
+map <leader>s :w<CR>:sh<CR>
+map <leader>b :CtrlPBuffer<CR>
 
