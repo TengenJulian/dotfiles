@@ -43,11 +43,11 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = Source Code Pro Medium:weight=regular:size=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-1 = Unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = Wuncon Siji:pixelsize=10;1
 
 modules-left = bspwm i3
-modules-center = 
+modules-center =
 modules-right = volume battery wlan eth date powermenu
 
 tray-position = right
