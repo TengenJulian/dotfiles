@@ -123,3 +123,22 @@ super + {Left,Down,Up,Right}
 # Rotate focused
 super + {r, R}
 	bspc node @/ -R {90, 270}
+
+# Print Screen
+Print
+    import -window root screenshot-$(date +'%Y-%m-%d_%H-%M-%S').jpg
+
+# Volume and backlight
+
+XF86AudioRaiseVolume 
+    zenbook-utilities sound increase
+XF86AudioLowerVolume 
+    zenbook-utilities sound decrease
+XF86AudioMute 
+    zenbook-utilities sound toggle
+
+XF86KbdBrightnessUp 
+    zenbook-utilities kb_backlight increase
+XF86KbdBrightnessDown 
+    zenbook-utilities kb_backlight decrease
+
