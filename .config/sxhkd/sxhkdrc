@@ -130,15 +130,15 @@ Print
 
 # Volume and backlight
 
-XF86AudioRaiseVolume 
+XF86AudioRaiseVolume
     zenbook-utilities sound increase
-XF86AudioLowerVolume 
+XF86AudioLowerVolume
     zenbook-utilities sound decrease
-XF86AudioMute 
+XF86AudioMute
     zenbook-utilities sound toggle
 
-XF86KbdBrightnessUp 
+XF86KbdBrightnessUp
     zenbook-utilities kb_backlight increase
-XF86KbdBrightnessDown 
+XF86KbdBrightnessDown
     zenbook-utilities kb_backlight decrease
 

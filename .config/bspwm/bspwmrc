@@ -24,9 +24,10 @@ bspc config gapless_monocle      true
 bspc config focused_border_color \#f2777a
 bspc config click_to_focus true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Zathura state=tiled
+bspc rule -a Spacemacs state=tiled
+bspc rule -a Emacs state=tiled
 
