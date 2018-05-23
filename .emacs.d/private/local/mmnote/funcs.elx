@@ -1,0 +1,116 @@
+;;; funcs.el --- mmnote Layer packages File for Spacemacs
+;;
+;; Copyright (c) 2012-2014 Sylvain Benner
+;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; License: GPLv3
+
+
+;;; ability to set directory of modes
+;;; This folder has the following structure
+;;; <mmn-folder>/
+;;;    - modes
+;;;       - <major mode name>.org
+;;;    - files
+;;;       - <file name>.org
+;;;    - misc
+;;;       - <misc name>.org
+
+;;; function to open current major mode notebook
+;;; function to choose one of the minor mode notebook
+;;; function to open ido-complete with notebooks
+
+;;; keybinding for the above functions
+(require 'f)
+(require 'dash)
+(require 'subr-x)
+
+(defgroup mmnote nil " Major Minor Note group.")
+
+(defcustom mmnote-folder "~/Dropbox/notes"
+  "The folder location of the note files."
+  :type '(file :must-match t)
+  :group 'mmnote
+  )
+
+(defun mmnote-get-folder (folder) (f-join mmnote-folder folder))
+
+(defun mmnote-open-or-create-file (filename)
+  (interactive)
+  (let ((filepath (f-join mmnote-folder filename)))
+    (if (not (f-exists? filepath))
+        (f-touch filepath))
+    (find-file filepath)
+    ))
+
+(defun mmnote-make-default-dirs ()
+  (interactive)
+  (let ((dirs (-map 'mmnote-get-folder '("modes" "files" "misc"))))
+    (-each dirs
+      (lambda (dir)
+        (unless (f-exists? dir) (f-mkdir dir))))
+    )
+  )
+
+(defun mmnote-open-notebook (type &optional name)
+  (cond ((string= type "modes") (mmnote-open-mode-notebook name))
+        ((string= type "files") (mmnote-open-file-notebook name))
+        ((string= type "misc")  (mmnote-open-misc-notebook name))
+        ))
+
+(defun mmnote-open-mode-notebook (&optional o-name)
+  (message "%s %s"(format "%s.org" major-mode) o-name)
+  (interactive)
+  (let ((name (if o-name o-name (format "%s.org" major-mode))))
+    (mmnote-make-default-dirs)
+    (mmnote-open-or-create-file (f-join (mmnote-get-folder "modes") name))))
+
+(defun personal-current-dir ()
+  (or
+   (file-name-directory (or "" (buffer-file-name)))
+   (file-truename default-directory)))
+
+(defun mmnote-open-misc-notebook (name)
+  (mmnote-make-default-dirs)
+  (mmnote-open-or-create-file (f-join (mmnote-get-folder "misc") name)))
+
+(defun mmnote-open-project-notebook (&optional name)
+  (interactive)
+  (message "mmnote-open-project-notebook is not implemented"))
+
+(defun mmnote-open-file-notebook (&optional o-fullpath)
+  (interactive)
+  (mmnote-make-default-dirs)
+  (let ((fullpath (if o-fullpath o-fullpath (buffer-file-name))))
+    (let ((filename (f-filename fullpath))
+          (hash (md5 fullpath)))
+         (mmnote-open-or-create-file (f-join (mmnote-get-folder "misc")
+                                             (format "%s-%s.org" filename hash))))
+    )
+  )
+
+(defun mmnote-ido-select ()
+  (interactive)
+  (let ((file-map (make-hash-table :test 'equal)))
+    (-each (f-files (mmnote-get-folder "modes"))
+      (lambda (path) (puthash path "modes" file-map))
+      )
+    (-each (f-files (mmnote-get-folder "files"))
+      (lambda (path) (puthash path "modes" file-map))
+      )
+    (-each (f-files (mmnote-get-folder "misc"))
+      (lambda (path) (puthash path "modes" file-map))
+      )
+    (let ((selection (ido-completing-read "Select a notebook: " (hash-table-keys file-map))))
+      (mmnote-open-notebook (gethash selection file-map) selection)
+      )))
+
+(define-minor-mode mmnote-mode
+  "Mayor Minor note making mode."
+  :lighter " mmn"
+  :global t
+  (mmnote-make-default-dirs))
+
+(provide 'mmnote)

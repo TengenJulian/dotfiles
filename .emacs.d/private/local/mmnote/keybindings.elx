@@ -1,0 +1,10 @@
+;;; keybindings.el --- mmnote Layer packages File for Spacemacs
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; License: GPLv3
+
+(spacemacs/set-leader-keys "onf" 'mmnote-open-file-notebook)
+(spacemacs/set-leader-keys "onm" 'mmnote-open-mode-notebook)
+(spacemacs/set-leader-keys "ono" 'mmnote-open-other-notebook)
+(spacemacs/set-leader-keys "onl" 'mmnote-ido-select)

@@ -1,0 +1,36 @@
+;;; personal-map.el --- SUMMARY
+;;; Commentary:
+;;; File with personal keybindigs
+;;; Code:
+
+;(require 'evil)
+;(require 'evil-surround)
+;(require 'ace-window)
+;(require 'dired)
+
+(define-key evil-normal-state-map "] " 'personal-insert-newline-after)
+(define-key evil-normal-state-map "[ " 'personal-insert-newline-before)
+
+;;; Global Keybindings
+(global-set-key (kbd "C-x C-c") 'save-buffers-kill-emacs)
+(global-set-key (kbd "M-[") 'previous-buffer)
+(global-set-key (kbd "M-]") 'next-buffer)
+(global-set-key (kbd "C-c i") 'imenu)
+
+;(define-key dired-mode-map [(q)] 'kill-this-buffer)
+
+;;; Emacs binding for evil insert mode
+(define-key evil-insert-state-map (kbd "C-a") 'prelude-move-beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-insert-state-map (kbd "M-f") 'forward-word)
+(define-key evil-insert-state-map (kbd "M-b") 'backward-word)
+
+(evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region)
+
+(setq ispell-program-name "aspell")
+
+;;; Ace Keybinds
+;(define-key evil-window-map (kbd "SPC") 'ace-window)
+
+(provide 'personal-map)
+;;; personal-map.el ends here
