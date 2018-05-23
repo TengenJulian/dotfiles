@@ -25,7 +25,7 @@
     palette = "#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#d3d0c8:#747369:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#f2f0ec"
     scroll_on_keystroke = False
     scrollbar_position = hidden
-  [[Base16 Eighties Dark]]
+  [[base16 flat]]
     background_color = "#2d2d2d"
     copy_on_selection = True
     cursor_color = "#d3d0c8"
